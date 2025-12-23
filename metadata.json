@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Buildify",
+  "description": "The All-in-One AI Business Creation Platform. Build your brand, logo, and strategy in minutes.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}
