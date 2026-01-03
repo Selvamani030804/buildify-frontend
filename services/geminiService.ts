@@ -84,12 +84,13 @@ export const createChat = (context: string) => {
   };
 };
 
-// --- 5. Logo Generation (Connects to '/logo' route) ---
+// --- 5. Logo Generation (FIXED) ---
 export const generateLogo = async (description: string, style: string): Promise<string> => {
-  // Assumes your backend has a route at /api/logo/generate
-  // If this fails, we need to check your routes/logo.js file
-  const data = await callBackend('/logo/generate', { description, style });
-  return data.imageUrl; // Expecting backend to return { imageUrl: "data:image..." }
+  // FIXED: Endpoint changed from '/logo/generate' to '/logo/generate-logo'
+  const data = await callBackend('/logo/generate-logo', { description, style });
+  
+  // FIXED: Changed 'imageUrl' to 'image' to match your backend response
+  return data.image; 
 };
 
 // --- 6. Image Editing (Connects to '/studio' route) ---
@@ -114,10 +115,8 @@ export const generateVeoVideo = async (imageFile: File, prompt: string): Promise
 };
 
 // --- 8. Live API (Placeholder) ---
-// Note: The Live API (Realtime Voice) requires a WebSocket server.
-// A simple REST backend cannot handle this easily yet. 
-// We are temporarily disabling it to prevent crashes.
 export const connectToLiveAPI = async (
+  // @ts-ignore
   onAudioData: (buffer: AudioBuffer) => void,
   onClose: () => void
 ): Promise<{ sendAudio: (data: Float32Array) => void; close: () => void }> => {
